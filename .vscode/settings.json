@@ -1,17 +1,25 @@
 {
     "cSpell.words": [
         "Beastmaster",
+        "blit",
         "Bloodmage",
+        "collidepoint",
         "dataframe",
         "debuffing",
         "Debuffs",
         "Explorable",
+        "FULLSCREEN",
+        "KEYDOWN",
         "levelname",
+        "MOUSEBUTTONDOWN",
+        "NOFRAME",
         "pandastable",
         "respecc",
         "showstatusbar",
         "showtoolbar",
+        "signum",
         "Spellblade",
-        "themself"
+        "themself",
+        "USEREVENT"
     ]
 }

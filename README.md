@@ -33,21 +33,17 @@ Each hero has a primary class and a subclass within that. Classes determine (amo
 ### Stats
 - Ability Scores (intrinsic, contributing to other stats and skill bonuses, as well as being factored into combat actions).
     - **Toughness**
-        - Hit points
         - Armor capacity
         - Carrying capacity
         - Physical endurance
     - **Agility**
-        - Physical defense
-        - 
+        - Evasion?
         - Initiative
     - **Personality**
         - NPC interaction skills
-        - Mental defense
     - **Mind**
         - Perception
         - Knowledge skills
-        - Mental endurance
 
 - Class (changeable - see above)
 - Meters (change throughout gameplay)
