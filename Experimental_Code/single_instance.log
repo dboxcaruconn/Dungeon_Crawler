@@ -1,0 +1,19 @@
+2024-01-07 21:17:03,030:DEBUG:Checking for existing application instance.
+2024-01-07 21:17:03,031:DEBUG:Lock file created.
+2024-01-07 21:17:06,061:DEBUG:Lock file deleted.
+2024-01-07 21:17:09,726:DEBUG:Checking for existing application instance.
+2024-01-07 21:17:09,727:DEBUG:Lock file created.
+2024-01-07 21:17:11,594:DEBUG:Lock file deleted.
+2024-01-07 21:17:13,534:DEBUG:Checking for existing application instance.
+2024-01-07 21:17:13,536:DEBUG:Lock file created.
+2024-01-07 21:17:15,708:DEBUG:Lock file deleted.
+2024-01-07 21:17:24,550:DEBUG:Checking for existing application instance.
+2024-01-07 21:17:24,552:DEBUG:Lock file created.
+2024-01-07 21:17:31,197:DEBUG:Checking for existing application instance.
+2024-01-07 21:17:31,197:INFO:Application is already running.
+2024-01-07 21:17:32,480:DEBUG:Lock file deleted.
+2024-01-07 21:17:36,296:DEBUG:Checking for existing application instance.
+2024-01-07 21:17:36,297:DEBUG:Lock file created.
+2024-01-07 21:17:48,502:DEBUG:Checking for existing application instance.
+2024-01-07 21:17:48,502:INFO:Application is already running.
+2024-01-07 21:17:51,346:DEBUG:Lock file deleted.

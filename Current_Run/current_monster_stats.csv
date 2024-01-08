@@ -1,0 +1,4 @@
+Monster,LVL,HP,ATK,DEF,SPD
+Goblin,1,4,1,2,3
+Orc,2,6,3,2,2
+Death Knight,3,10,4,8,1
