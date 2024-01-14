@@ -26,10 +26,15 @@ class GameManager:
         # Clock
         self.clock = pygame.time.Clock()
 
-        # Custom Font (Ensure the font file is available in the same directory or adjust the path accordingly)
-        font_name = 'GENOGRUNGE.OTF'
+        # Custom Font
+        font_name = 'SOURCESANSPRO-REGULAR.OTF'
         font_path = os.path.join(os.path.dirname(__file__), font_name)
-        self.custom_font = pygame.font.Font(font_path, 36)
+        self.custom_font = pygame.font.Font(font_path, 20)
+        
+        # Custom Title Font
+        title_font_name = 'GENOGRUNGE.OTF'
+        title_font_path = os.path.join(os.path.dirname(__file__), title_font_name)
+        self.custom_title_font = pygame.font.Font(title_font_path, 36)
 
         # Panes and other UI elements
         self._initialize_panes()
@@ -52,12 +57,43 @@ class GameManager:
 
     def _initialize_panes(self):
         colors = [(145, 145, 120), (0, 255, 0)]
-        titles = ["Heroes", "Exploration", "Journal", "Inventory"]
+
+        pane_ratios = [
+            (1, 2),  # width ratio (Heroes,Exploration)
+            (2, 1),  # height ratio (Heroes,Journal)
+        ]
+
+        total_width_ratio = sum(pane_ratios[0])
+        total_height_ratio = sum(pane_ratios[1])
+        
+        left_pane_width = self.SCREEN_WIDTH * pane_ratios[0][0] // total_width_ratio
+        right_pane_width = self.SCREEN_WIDTH * pane_ratios[0][1] // total_width_ratio
+        top_pane_height = self.SCREEN_HEIGHT * pane_ratios[1][0] // total_height_ratio
+        bottom_pane_height = self.SCREEN_HEIGHT * pane_ratios[1][1] // total_height_ratio
+
+        pane_sizes = [
+            (left_pane_width, top_pane_height),  # "Heroes"
+            (right_pane_width, top_pane_height),  # "Exploration"
+            (left_pane_width, bottom_pane_height),  # "Journal"
+            (right_pane_width, bottom_pane_height)   # "Inventory"
+        ]
+
+        pane_positions = [
+            (0, 0),  # x, y for "Heroes"
+            (left_pane_width, 0),  # x, y for "Exploration"
+            (0, top_pane_height),  # x, y for "Journal"
+            (left_pane_width, top_pane_height)  # x, y for "Inventory"
+        ]
+
         self.panes = [
-            Pane(0, 0, self.SCREEN_WIDTH // 2, self.SCREEN_HEIGHT // 2, colors[0], titles[0]),
-            Pane(self.SCREEN_WIDTH // 2, 0, self.SCREEN_WIDTH // 2, self.SCREEN_HEIGHT // 2, colors[1], titles[1]),
-            Pane(0, self.SCREEN_HEIGHT // 2, self.SCREEN_WIDTH // 2, self.SCREEN_HEIGHT // 2, colors[1], titles[2]),
-            Pane(self.SCREEN_WIDTH // 2, self.SCREEN_HEIGHT // 2, self.SCREEN_WIDTH // 2, self.SCREEN_HEIGHT // 2, colors[0], titles[3])
+            #Hero Pane:
+            Pane(pane_positions[0][0], pane_positions[0][1], pane_sizes[0][0], pane_sizes[0][1], colors[0], "Heroes"),
+            #Exploration Pane:
+            Pane(pane_positions[1][0], pane_positions[1][1], pane_sizes[1][0], pane_sizes[1][1], colors[1], "Exploration"),
+            #Journal Pane:
+            Pane(pane_positions[2][0], pane_positions[2][1], pane_sizes[2][0], pane_sizes[2][1], colors[1], "Journal"),
+            #Inventory Pane:
+            Pane(pane_positions[3][0], pane_positions[3][1], pane_sizes[3][0], pane_sizes[3][1], colors[0], "Inventory")
         ]
 
     def run(self):
@@ -93,7 +129,7 @@ class GameManager:
     def _draw(self):
         self.screen.fill((0, 0, 0))  # Clear screen
         for pane in self.panes:
-            pane.draw(self.screen, self.custom_font)
+            pane.draw(self.screen, self.custom_title_font)
         
         # Draw the button
         self.close_button.draw(self.screen, pygame.mouse.get_pos())
