@@ -9,7 +9,7 @@ The player will control a party of four heroes as they traverse the dungeon.
 
 ### Classes
 Each hero has a primary class and a subclass within that. Classes determine (among other things) the combat actions available to the hero, which in turn determine which ability scores should be prioritized. Each class corresponds to an archetype that uses a specific ability score (Toughness, Agility, Personality, or Mind), and most subclasses add a flavor of another class to the primary class.
-- **WARRIOR** (Toughness): Frontline tank.
+- **WARRIOR** (Might): Frontline tank.
     - **Soldier** (_Base_)
     - **Bruiser** (_Rogue_)
     - **Knight** (_Support_)
@@ -19,7 +19,7 @@ Each hero has a primary class and a subclass within that. Classes determine (amo
     - **Monk** (_Warrior_)
     - **Brigand** (_Support_)
     - **Scout** (_Caster_)
-- **SUPPORT** (Personality): Buffs allies.
+- **SUPPORT** (Charisma): Buffs allies.
     - **Noble** (_Base_)
     - **Warlord** (_Warrior_)
     - **Beastmaster** (_Rogue_)
@@ -32,14 +32,14 @@ Each hero has a primary class and a subclass within that. Classes determine (amo
 
 ### Stats
 - Ability Scores (intrinsic, contributing to other stats and skill bonuses, as well as being factored into combat actions).
-    - **Toughness**
+    - **Might**
         - Armor capacity
         - Carrying capacity
         - Physical endurance
     - **Agility**
         - Evasion?
         - Initiative
-    - **Personality**
+    - **Charisma**
         - NPC interaction skills
     - **Mind**
         - Perception
@@ -50,6 +50,22 @@ Each hero has a primary class and a subclass within that. Classes determine (amo
     - HP
     - DEFENSE
     - EXHAUSTION
+
+## Entourage
+The party can recruit NPCs an other additions to their entourage, who will travel with the party in the overworld and provide services, bonuses, etc while outside of dungeons.
+
+Each member of the entourage requires resources during overworld travel.
+
+**Entourage inefficiency:** The more elements in the entourage, the less efficiently the party can travel (requiring more time).
+
+For example:
+
+- Traveling Blacksmith (buy/repair weapons and armor)
+- Traveling Tinker (buy/craft items)
+- Mule (increase entourage inventory)
+- Draft Horse (increase entourage inventory & decrease entourage efficiency (but won't reduce inefficiency below 0%))
+- Ranger (decrease entourage inefficiency)
+
 
 ## Gameplay Panes
 There will be four major panes onscreen for the player to view and interact with:
@@ -65,7 +81,7 @@ The journal pane shows the quests, objective, log, prior maps, collected informa
 
 ### Exploration Pane
 The biggest pane, and the one the player will engage with the most during gameplay. There are several tabs of this pane, which will either be switchable or locked depending on gameplay events. The bottom section of this pane will often show an OPTIONS section, which will display exploration or interaction options the party can take in the current tab that are not otherwise selectable in that tab's GUI.
-- **OVERLAND:** Shows the region's map, including nodes, quest markers, and the player's location. Allows the player to control the party's movement and progression.
+- **OVERWORLD:** Shows the region's map, including nodes, quest markers, and the player's location. Allows the player to control the party's movement and progression.
 - **NODE:** Shows the current location within the current node, which could take several forms depending on the location within the node.
     - **Sandbox:** Shows the various options and details for the current location, including different buildings or locations that can be entered.
     - **Dungeon:** Explorable map grid. Player moves party around the grid, encountering monsters, NPCs, curios, treasure, etc.

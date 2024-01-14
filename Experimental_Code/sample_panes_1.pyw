@@ -11,10 +11,11 @@ class Pane:
         self.width = width
         self.height = height
         self.color = color
-
+    # draw method to draw the pane
     def draw(self, screen):
         pygame.draw.rect(screen, self.color, (self.x, self.y, self.width, self.height))
 
+# main function
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -32,6 +33,7 @@ def main():
         Pane(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, colors[3])
     ]
 
+    # main loop
     running = True
     while running:
         for event in pygame.event.get():
@@ -51,5 +53,6 @@ def main():
 
     pygame.quit()
 
+# call main function
 if __name__ == "__main__":
     main()
