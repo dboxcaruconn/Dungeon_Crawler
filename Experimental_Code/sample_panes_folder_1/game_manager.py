@@ -5,6 +5,13 @@ from classes import Pane
 from classes import Button
 
 class GameManager:
+    
+    def button_icon_path(self, file_name):
+        button_icons_folder = 'Icons_Buttons'
+        icon_path = os.path.join(os.path.dirname(__file__), button_icons_folder, file_name)
+        loaded_icon = pygame.image.load(icon_path).convert_alpha()
+        return loaded_icon
+    
     def __init__(self):
         pygame.init()
 
@@ -49,14 +56,15 @@ class GameManager:
         inventory_pane = next(pane for pane in self.panes if pane.title == "Inventory")
         exploration_pane = next(pane for pane in self.panes if pane.title == "Exploration")
 
-        # Initialize the Close button
         self.close_button = Button(
-            x=journal_pane.x + self.scale*10, y=journal_pane.y + self.scale*20, width=self.scale*45, height=self.scale*20, 
-            text="Close Game", 
-            font=self.custom_font, 
-            button_color=(0, 200, 0), 
-            hover_color=(0, 255, 0), 
-            text_color=(255, 255, 255)
+            self.scale,x=journal_pane.x + self.scale*10, y=journal_pane.y + self.scale*20, width=self.scale*15, height=self.scale*15, 
+            button_color=(200, 0, 0), 
+            hover_color=(255, 0, 0), 
+            text_color=(0, 0, 0),
+            #text="Close Game", 
+            font=self.custom_font,
+            image=self.button_icon_path('close_button.png'),  # Pass the loaded image
+            hover_text="Close Game"
         )
 
     def _initialize_panes(self):
@@ -93,13 +101,13 @@ class GameManager:
 
         self.panes = [
             #Hero Pane:
-            Pane(pane_positions[0][0], pane_positions[0][1], pane_sizes[0][0], pane_sizes[0][1], colors[0], "Heroes"),
+            Pane(self.scale, pane_positions[0][0], pane_positions[0][1], pane_sizes[0][0], pane_sizes[0][1], colors[0], "Heroes"),
             #Exploration Pane:
-            Pane(pane_positions[1][0], pane_positions[1][1], pane_sizes[1][0], pane_sizes[1][1], colors[1], "Exploration"),
+            Pane(self.scale, pane_positions[1][0], pane_positions[1][1], pane_sizes[1][0], pane_sizes[1][1], colors[1], "Exploration"),
             #Journal Pane:
-            Pane(pane_positions[2][0], pane_positions[2][1], pane_sizes[2][0], pane_sizes[2][1], colors[1], "Journal"),
+            Pane(self.scale, pane_positions[2][0], pane_positions[2][1], pane_sizes[2][0], pane_sizes[2][1], colors[1], "Journal"),
             #Inventory Pane:
-            Pane(pane_positions[3][0], pane_positions[3][1], pane_sizes[3][0], pane_sizes[3][1], colors[0], "Inventory")
+            Pane(self.scale, pane_positions[3][0], pane_positions[3][1], pane_sizes[3][0], pane_sizes[3][1], colors[0], "Inventory")
         ]
 
     def run(self):
