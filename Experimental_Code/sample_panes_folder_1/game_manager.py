@@ -15,6 +15,7 @@ class GameManager:
 
         self.SCREEN_WIDTH = screen_info.current_w
         self.SCREEN_HEIGHT = screen_info.current_h
+        self.scale = self.SCREEN_HEIGHT // 360
 
         # Setup the main screen
         self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT), pygame.FULLSCREEN | pygame.DOUBLEBUF)
@@ -26,28 +27,31 @@ class GameManager:
         # Clock
         self.clock = pygame.time.Clock()
 
+        #Prepare to Set Fonts
+        fonts_folder = 'Fonts'
+
         # Custom Font
-        font_name = 'SOURCESANSPRO-REGULAR.OTF'
-        font_path = os.path.join(os.path.dirname(__file__), font_name)
-        self.custom_font = pygame.font.Font(font_path, 20)
-        
+        font_name = 'JUSTMB__.TTF'
+        font_path = os.path.join(os.path.dirname(__file__), fonts_folder, font_name)
+        self.custom_font = pygame.font.Font(font_path, self.scale * 8)
+
         # Custom Title Font
-        title_font_name = 'GENOGRUNGE.OTF'
-        title_font_path = os.path.join(os.path.dirname(__file__), title_font_name)
-        self.custom_title_font = pygame.font.Font(title_font_path, 36)
+        title_font_name = 'Draconis.otf'
+        title_font_path = os.path.join(os.path.dirname(__file__), fonts_folder, title_font_name)
+        self.custom_title_font = pygame.font.Font(title_font_path, self.scale * 16)
 
         # Panes and other UI elements
         self._initialize_panes()
-        
+
         # Locate the Panes
         hero_pane = next(pane for pane in self.panes if pane.title == "Heroes")
         journal_pane = next(pane for pane in self.panes if pane.title == "Journal")
         inventory_pane = next(pane for pane in self.panes if pane.title == "Inventory")
         exploration_pane = next(pane for pane in self.panes if pane.title == "Exploration")
-        
+
         # Initialize the Close button
         self.close_button = Button(
-            x=journal_pane.x + 20, y=journal_pane.y + 20, width=100, height=50, 
+            x=journal_pane.x + self.scale*10, y=journal_pane.y + self.scale*20, width=self.scale*45, height=self.scale*20, 
             text="Close Game", 
             font=self.custom_font, 
             button_color=(0, 200, 0), 
@@ -56,16 +60,18 @@ class GameManager:
         )
 
     def _initialize_panes(self):
-        colors = [(145, 145, 120), (0, 255, 0)]
+        colors = [(145, 145, 120),  # Grey
+                  (155, 155, 130)]  # Lighter Grey
 
         pane_ratios = [
-            (1, 2),  # width ratio (Heroes,Exploration)
-            (2, 1),  # height ratio (Heroes,Journal)
+            (1, 2), # width ratio   (Heroes,Exploration)
+            (2,     # height        (Heroes,
+             1),    #  ratio        Journal)
         ]
 
         total_width_ratio = sum(pane_ratios[0])
         total_height_ratio = sum(pane_ratios[1])
-        
+
         left_pane_width = self.SCREEN_WIDTH * pane_ratios[0][0] // total_width_ratio
         right_pane_width = self.SCREEN_WIDTH * pane_ratios[0][1] // total_width_ratio
         top_pane_height = self.SCREEN_HEIGHT * pane_ratios[1][0] // total_height_ratio

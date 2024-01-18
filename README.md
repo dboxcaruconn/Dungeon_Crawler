@@ -14,7 +14,7 @@ Each hero has a primary class and a subclass within that. Classes determine (amo
     - **Bruiser** (_Rogue_)
     - **Knight** (_Support_)
     - **Duelist** (_Caster_)
-- **ROGUE** (Agility): Damage-dealer, skill-monkey. 
+- **ROGUE** (Agility): Damage-dealer, skill-monkey.
     - **Thief** (_Base_) 
     - **Monk** (_Warrior_)
     - **Brigand** (_Support_)
@@ -24,7 +24,7 @@ Each hero has a primary class and a subclass within that. Classes determine (amo
     - **Warlord** (_Warrior_)
     - **Beastmaster** (_Rogue_)
     - **Bard** (_Caster_)
-- **CASTER** (Mind): Debuffs enemies, buffs themself.
+- **CASTER** (Intellect): Debuffs enemies, buffs themself.
     - **Sage** (_Base_) 
     - **Bloodmage** (_Warrior_)
     - **Spellblade** (_Rogue_)
@@ -41,7 +41,7 @@ Each hero has a primary class and a subclass within that. Classes determine (amo
         - Initiative
     - **Charisma**
         - NPC interaction skills
-    - **Mind**
+    - **Intellect**
         - Perception
         - Knowledge skills
 
