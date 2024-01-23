@@ -1,22 +1,17 @@
 import pygame
 import pygame_gui
 import os
-from classes import Pane
-from classes import Button
+
+import path_defs
+from pane_class import Pane
+from button_class import Button
 
 class GameManager:
-    
-    def button_icon_path(self, file_name):
-        button_icons_folder = 'Icons_Buttons'
-        icon_path = os.path.join(os.path.dirname(__file__), button_icons_folder, file_name)
-        loaded_icon = pygame.image.load(icon_path).convert_alpha()
-        return loaded_icon
-    
+
     def __init__(self):
         pygame.init()
 
         # Screen Information
-        temp_surface = pygame.display.set_mode((0, 0), pygame.HIDDEN)
         screen_info = pygame.display.Info()
         pygame.display.quit()
 
@@ -25,7 +20,7 @@ class GameManager:
         self.scale = self.SCREEN_HEIGHT // 360
 
         # Setup the main screen
-        self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT), pygame.FULLSCREEN | pygame.DOUBLEBUF)
+        self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT), pygame.FULLSCREEN | pygame.DOUBLEBUF | pygame.SRCALPHA)
         pygame.display.set_caption("DUNGEON CRAWLER")
 
         # UIManager
@@ -34,18 +29,11 @@ class GameManager:
         # Clock
         self.clock = pygame.time.Clock()
 
-        #Prepare to Set Fonts
-        fonts_folder = 'Fonts'
-
         # Custom Font
-        font_name = 'JUSTMB__.TTF'
-        font_path = os.path.join(os.path.dirname(__file__), fonts_folder, font_name)
-        self.custom_font = pygame.font.Font(font_path, self.scale * 8)
+        self.custom_font = path_defs.font_path('JUSTMB__.TTF', 8 * self.scale)
 
         # Custom Title Font
-        title_font_name = 'Draconis.otf'
-        title_font_path = os.path.join(os.path.dirname(__file__), fonts_folder, title_font_name)
-        self.custom_title_font = pygame.font.Font(title_font_path, self.scale * 16)
+        self.custom_title_font = path_defs.font_path('Draconis.otf', 16 * self.scale)
 
         # Panes and other UI elements
         self._initialize_panes()
@@ -58,12 +46,12 @@ class GameManager:
 
         self.close_button = Button(
             self.scale,x=journal_pane.x + self.scale*10, y=journal_pane.y + self.scale*20, width=self.scale*15, height=self.scale*15, 
-            button_color=(200, 0, 0), 
-            hover_color=(255, 0, 0), 
+            button_color=(200, 0, 0, 50),
+            hover_color=(255, 0, 0, 50),
             text_color=(0, 0, 0),
-            #text="Close Game", 
+            #text="Close Game",
             font=self.custom_font,
-            image=self.button_icon_path('close_button.png'),  # Pass the loaded image
+            image=path_defs.button_icon_path('close_button.png'),  # Pass the loaded image
             hover_text="Close Game"
         )
 
@@ -72,9 +60,9 @@ class GameManager:
                   (155, 155, 130)]  # Lighter Grey
 
         pane_ratios = [
-            (1, 2), # width ratio   (Heroes,Exploration)
+            (1, 2), # width ratio   (Heroes, Exploration)
             (2,     # height        (Heroes,
-             1),    #  ratio        Journal)
+             1),    # ratio          Journal)
         ]
 
         total_width_ratio = sum(pane_ratios[0])
@@ -101,13 +89,17 @@ class GameManager:
 
         self.panes = [
             #Hero Pane:
-            Pane(self.scale, pane_positions[0][0], pane_positions[0][1], pane_sizes[0][0], pane_sizes[0][1], colors[0], "Heroes"),
+            Pane(self.scale, pane_positions[0][0], pane_positions[0][1], 
+                 pane_sizes[0][0], pane_sizes[0][1], colors[0], "Heroes"),
             #Exploration Pane:
-            Pane(self.scale, pane_positions[1][0], pane_positions[1][1], pane_sizes[1][0], pane_sizes[1][1], colors[1], "Exploration"),
+            Pane(self.scale, pane_positions[1][0], pane_positions[1][1], 
+                 pane_sizes[1][0], pane_sizes[1][1], colors[1], "Exploration"),
             #Journal Pane:
-            Pane(self.scale, pane_positions[2][0], pane_positions[2][1], pane_sizes[2][0], pane_sizes[2][1], colors[1], "Journal"),
+            Pane(self.scale, pane_positions[2][0], pane_positions[2][1], 
+                 pane_sizes[2][0], pane_sizes[2][1], colors[1], "Journal"),
             #Inventory Pane:
-            Pane(self.scale, pane_positions[3][0], pane_positions[3][1], pane_sizes[3][0], pane_sizes[3][1], colors[0], "Inventory")
+            Pane(self.scale, pane_positions[3][0], pane_positions[3][1], 
+                 pane_sizes[3][0], pane_sizes[3][1], colors[0], "Inventory")
         ]
 
     def run(self):
@@ -125,7 +117,7 @@ class GameManager:
             self._draw()
 
             # Update the display
-            pygame.display.flip()
+            #pygame.display.flip()
 
         pygame.quit()
 
