@@ -47,7 +47,7 @@ class Button:
             elif time.time() - self.hover_start_time > 0.1:  # 100 milliseconds
                 if self.hover_text and self.font:
                     hover_text_surface = self.font.render(self.hover_text, True, self.hover_text_color)
-                    hover_text_rect = hover_text_surface.get_rect(x=self.rect.x + self.rect.width + self.scale*2, y=self.rect.y)
+                    hover_text_rect = hover_text_surface.get_rect(x=self.rect.x + self.rect.width + self.scale*4, y=self.rect.y)
                     # Draw background rectangle for hover text
                     pygame.draw.rect(screen, self.hover_color, hover_text_rect.inflate(self.scale, self.scale))
                     # Draw hover text

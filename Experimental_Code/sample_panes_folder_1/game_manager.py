@@ -1,6 +1,5 @@
 import pygame
 import pygame_gui
-import os
 
 import path_defs
 from pane_class import Pane
@@ -17,7 +16,7 @@ class GameManager:
 
         self.SCREEN_WIDTH = screen_info.current_w
         self.SCREEN_HEIGHT = screen_info.current_h
-        self.scale = self.SCREEN_HEIGHT // 360
+        self.scale = self.SCREEN_HEIGHT // 720
 
         # Setup the main screen
         self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT), pygame.FULLSCREEN | pygame.DOUBLEBUF | pygame.SRCALPHA)
@@ -30,34 +29,45 @@ class GameManager:
         self.clock = pygame.time.Clock()
 
         # Custom Font
-        self.custom_font = path_defs.font_path('JUSTMB__.TTF', 8 * self.scale)
+        self.custom_font = path_defs.font_path('JUSTMB__.TTF', 16*self.scale)
 
         # Custom Title Font
-        self.custom_title_font = path_defs.font_path('Draconis.otf', 16 * self.scale)
+        self.custom_title_font = path_defs.font_path('Draconis.otf', 28*self.scale)
 
         # Panes and other UI elements
         self._initialize_panes()
 
         # Locate the Panes
-        hero_pane = next(pane for pane in self.panes if pane.title == "Heroes")
+        heroes_pane = next(pane for pane in self.panes if pane.title == "Heroes")
         journal_pane = next(pane for pane in self.panes if pane.title == "Journal")
         inventory_pane = next(pane for pane in self.panes if pane.title == "Inventory")
         exploration_pane = next(pane for pane in self.panes if pane.title == "Exploration")
 
-        self.close_button = Button(
-            self.scale,x=journal_pane.x + self.scale*10, y=journal_pane.y + self.scale*20, width=self.scale*15, height=self.scale*15, 
-            button_color=(200, 0, 0, 50),
-            hover_color=(255, 0, 0, 50),
+        self.close_game_button = Button(
+            self.scale,x=journal_pane.x + self.scale*20, y=journal_pane.y + self.scale*40, width=self.scale*28, height=self.scale*28, 
+            button_color=(200, 0, 0, 128),
+            hover_color=(255, 0, 0, 128),
             text_color=(0, 0, 0),
             #text="Close Game",
             font=self.custom_font,
-            image=path_defs.button_icon_path('close_button.png'),  # Pass the loaded image
+            image=path_defs.button_icon_path('close_game_button.png'),  # Pass the loaded image
             hover_text="Close Game"
+        )
+        
+        self.max_heroes_pane_button = Button(
+            self.scale,x=exploration_pane.x - self.scale*26, y=heroes_pane.y + self.scale*4, width=self.scale*24, height=self.scale*24, 
+            button_color=(200, 0, 0, 128),
+            hover_color=(255, 0, 0, 128),
+            text_color=(0, 0, 0),
+            #text="Close Game",
+            font=self.custom_font,
+            image=path_defs.button_icon_path('max_heroes_pane_button.png'),  # Pass the loaded image
+            hover_text="Maximize Pane"
         )
 
     def _initialize_panes(self):
-        colors = [(145, 145, 120),  # Grey
-                  (155, 155, 130)]  # Lighter Grey
+        colors = [(155, 155, 130),  # Lighter Grey
+                  (145, 145, 120)]  # Grey
 
         pane_ratios = [
             (1, 2), # width ratio   (Heroes, Exploration)
@@ -127,7 +137,7 @@ class GameManager:
             if event.type == pygame.QUIT:
                 return False
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                if self.close_button.is_clicked(mouse_pos):
+                if self.close_game_button.is_clicked(mouse_pos):
                     return False
             self.manager.process_events(event)
         return True
@@ -138,6 +148,7 @@ class GameManager:
             pane.draw(self.screen, self.custom_title_font)
         
         # Draw the button
-        self.close_button.draw(self.screen, pygame.mouse.get_pos())
+        self.close_game_button.draw(self.screen, pygame.mouse.get_pos())
+        self.max_heroes_pane_button.draw(self.screen, pygame.mouse.get_pos())
 
         pygame.display.update()
