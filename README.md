@@ -32,24 +32,56 @@ Each hero has a primary class and a subclass within that. Classes determine (amo
 
 ### Stats
 - Ability Scores (intrinsic, contributing to other stats and skill bonuses, as well as being factored into combat actions).
-    - **Might**
+    - **STR (Strength)**
         - Armor capacity
+        - Weapon damage
+        - Tanking skills
         - Carrying capacity
-        - Physical endurance
+        - Some adventuring skills
     - **Agility**
-        - Evasion?
+        - Evasion
         - Initiative
+        - Accuracy
+        - Critical hit chance
+        - Some adventuring skills
     - **Charisma**
+        - Friendly skills
         - NPC interaction skills
     - **Intellect**
         - Perception
-        - Knowledge skills
+        - Spell damage
+        - Self-buff skills
+        - Debuff skills
+        - Some adventuring skills
 
 - Class (changeable - see above)
 - Meters (change throughout gameplay)
-    - HP
-    - DEFENSE
-    - EXHAUSTION
+    - **HP (Hit Points)**
+        - Reduced by:
+            - Damage.
+        - Determined by: class.
+        - Heals over time by draining EXH.
+            - Rate determined by: STR.
+            - Efficiency determined by: AGI.
+    - **SAN (Sanity)**
+        - Reduced by: 
+            - Horror (from monsters, crits, etc).
+            - Using magic.
+        - Determined by: class.
+        - Heals over time by draining EXH.
+            - Rate determined by: INT.
+            - Efficiency determined by: CHA.
+    - **EXH (Exhaustion)**
+        - Reduced by:
+            - Draining into HP/SAN over time.
+                - Rate determined by: STR/INT.
+                - Efficiency determined by: AGI/CHA.
+            - Time passing.
+            - Traveling.
+        - Determined by: fixed value (0-100)
+        - Heals by:
+            - Eating
+            - Sleeping
 
 ## Entourage
 The party can recruit NPCs an other additions to their entourage, who will travel with the party in the overworld and provide services, bonuses, etc while outside of dungeons.
@@ -60,11 +92,15 @@ Each member of the entourage requires resources during overworld travel.
 
 For example:
 
-- Traveling Blacksmith (buy/repair weapons and armor)
+- Traveling Blacksmith (buy/craft/repair weapons and armor)
 - Traveling Tinker (buy/craft items)
 - Mule (increase entourage inventory)
-- Draft Horse (increase entourage inventory & decrease entourage efficiency (but won't reduce inefficiency below 0%))
-- Ranger (decrease entourage inefficiency)
+- Draft Horse (increase entourage inventory & reduce entourage inefficiency - but not below 0%)
+- Ranger (reduce entourage inefficiency)
+- Priest of Fortune (Battleborn shrine)
+- Priest of Necromancy (Worm God shrine)
+- Occult Priest (Pact-Bound shrine)
+- Shepherd Priest (Strange Lamb shrine)
 
 
 ## Gameplay Panes

@@ -28,7 +28,7 @@ class Button:
         button_surface.fill(self.button_color if not self.rect.collidepoint(mouse_pos) else self.hover_color)
 
         # Draw the button surface onto the screen with blending
-        screen.blit(button_surface, (self.rect.x, self.rect.y), special_flags=pygame.BLEND_RGBA_MULT)
+        screen.blit(button_surface, (self.rect.x, self.rect.y))
 
         # Draw the image if it exists
         if self.image:
@@ -46,8 +46,8 @@ class Button:
                 self.hover_start_time = time.time()
             elif time.time() - self.hover_start_time > 0.1:  # 100 milliseconds
                 if self.hover_text and self.font:
-                    hover_text_surface = self.font.render(self.hover_text, True, self.hover_text_color)
-                    hover_text_rect = hover_text_surface.get_rect(x=self.rect.x + self.rect.width + self.scale*4, y=self.rect.y)
+                    hover_text_surface = self.font.render(self.hover_text, True, self.hover_text_color, pygame.SRCALPHA)
+                    hover_text_rect = hover_text_surface.get_rect(x=self.rect.x + self.rect.width + 4*self.scale, y=self.rect.y)
                     # Draw background rectangle for hover text
                     pygame.draw.rect(screen, self.hover_color, hover_text_rect.inflate(self.scale, self.scale))
                     # Draw hover text
