@@ -5,7 +5,7 @@ import time
 class Button:
     def __init__(self, scale, x, y, width, height, button_color, hover_color, 
                  text_color=(0, 0, 0, 255), hover_text_color=(255, 255, 255 ,255), text=None, font=None, 
-                 hover_text=None, image=None):
+                 hover_text=None, image=None, action=None):
         self.scale = scale
         self.rect = pygame.Rect(x, y, width, height)
         self.button_color = button_color
@@ -17,6 +17,7 @@ class Button:
         self.hover_text = hover_text
         self.image = pygame.transform.scale(image, (width, height)) if image else None
         self.hover_start_time = None
+        self.action = action
 
     def is_hovered(self):
         mouse_pos = pygame.mouse.get_pos()

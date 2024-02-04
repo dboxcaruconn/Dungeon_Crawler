@@ -10,3 +10,7 @@ def button_icon_path(file_name):
 def font_path(font_name, font_size, fonts_folder='Fonts'):
     font_path = os.path.join(os.path.dirname(__file__), fonts_folder, font_name)
     return pygame.font.Font(font_path, font_size)
+
+def data_path(file_name, data_folder='Data'):
+    data_path = os.path.join(os.path.dirname(__file__), data_folder, file_name)
+    return data_path
