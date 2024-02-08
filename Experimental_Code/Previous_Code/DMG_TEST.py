@@ -2,11 +2,11 @@ import matplotlib.pyplot as plt
 import random
 
 def dmg(x, y, z):
-    return max(round((random.random() + y*0.83 - 0.02*y*x) * x + 0.5 + z*(1+y)),1)
+    return round(random.uniform((1 + z)*(1 + y), (x + z)*(1 + y)))
 
 damage_die = 8               # x
-damage_bonus = 0          # y
-damage_flat = 2              # z
+damage_bonus = .05           # y
+damage_flat = 0              # z
 
 # Running 100,000 cases
 results = [dmg(damage_die, damage_bonus, damage_flat) for _ in range(100000)]

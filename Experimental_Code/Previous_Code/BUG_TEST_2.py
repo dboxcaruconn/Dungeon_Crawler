@@ -2,10 +2,13 @@
 import pandas as pd
 import random
 import pandasgui as pg 
+import plotly.express as px
 from sklearn.linear_model import LinearRegression
 
 def dmg(x, y):
-    return max(round((random.random() + 0.83*y - 0.02*y*x) * x + 0.5), 1)
+    min_val = (1) * (1 + y)
+    max_val = (x) * (1 + y)
+    return round(random.uniform(min_val, max_val))
 
 # Initialize the dataset
 data = {
@@ -52,20 +55,16 @@ for base in range(4, 13):
 coeff_intercept_df = pd.DataFrame(coeff_intercept_data)
 
 # Display the DataFrame using pandasgui
-pg.show(df)
+#pg.show(df)
 
-# Perform new linear regression
-X_new = coeff_intercept_df[['damage_base']]
-y_new = coeff_intercept_df['damage_bonus_coef']
-model_new = LinearRegression()
-model_new.fit(X_new, y_new)
-coefficients_new = model_new.coef_
-intercept_new = model_new.intercept_
+fig = px.scatter(df, 
+                 x='damage_base', 
+                 y='average_difference', 
+                 color='damage_bonus',
+                 color_continuous_scale=px.colors.sequential.Viridis, # This is optional, for custom color scale
+                 title='Damage Base vs. Average Difference by Damage Bonus')
 
-# Display the new coefficients and intercept
-print("New Coefficients:", coefficients_new)
-print("New Intercept:", intercept_new)
-
+fig.show()
 
 
 
